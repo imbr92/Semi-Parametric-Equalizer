@@ -1,9 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxAudioFile.h"
-#include "ofxFft.h"
+//#include "ofxAudioFile.h"
+//#include "ofxFft.h"
 #include "ofxGui.h"
+#include "fftw3.h"
 
 class ofApp : public ofBaseApp {
    public:
@@ -24,13 +25,13 @@ class ofApp : public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     // void ofApp::audioOut(float* input, int bufferSize, int nChannels);
-    void ofApp::audioOut(ofSoundBuffer& buffer);
+    //void ofApp::audioOut(ofSoundBuffer& buffer);
 
    private:
     ofxPanel gui;
     ofxButton load;
     ofxButton play;
-    ofSoundPlayer sound_file;
-    ofxAudioFile audiofile;
-    ofxFft* fft;
+    //ofSoundPlayer sound_file;
+    //ofxAudioFile audiofile;
+    //ofxFft* fft;
 };
