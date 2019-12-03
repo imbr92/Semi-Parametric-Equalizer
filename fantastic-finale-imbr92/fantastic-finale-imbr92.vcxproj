@@ -100,7 +100,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\soundtouch_dll-2.1.1</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -108,8 +108,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -129,8 +129,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -140,7 +140,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\soundtouch_dll-2.1.1</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -152,8 +152,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfftw3-3.lib;libfftw3f-3.lib;libfftw3l-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -163,7 +163,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalIncludeDirectories);src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\include;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\fftw\lib;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\libs\kiss;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxFft-master\src;..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -174,13 +174,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Polynomial.cpp" />
+    <ClCompile Include="WavFile.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src\ofxAudioFile.cpp" />
@@ -203,6 +204,7 @@
     <ClCompile Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxGui\src\ofxToggle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\libs\soundtouch_dll-2.1.1\SoundTouchDLL.h" />
     <ClInclude Include="Polynomial.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\ofxAudioFile-master\src\ofxAudioFile.h" />
@@ -244,7 +246,8 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="DevelopmentLog.txt" />
+    <Text Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\WavFile.h" />
+    <Text Include="DEVELOPMENT.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

@@ -70,6 +70,9 @@
     <ClCompile Include="Polynomial.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="WavFile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -197,11 +200,17 @@
     <ClInclude Include="Polynomial.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\libs\soundtouch_dll-2.1.1\SoundTouchDLL.h">
+      <Filter>addons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="DevelopmentLog.txt" />
+    <Text Include="DEVELOPMENT.md" />
+    <Text Include="..\..\..\..\..\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\WavFile.h">
+      <Filter>src</Filter>
+    </Text>
   </ItemGroup>
 </Project>
