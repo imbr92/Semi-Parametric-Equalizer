@@ -7,18 +7,6 @@ void ofApp::setup() {
     gui.setup();
     gui.add(load.setup("Load"));
     gui.add(play.setup("Play"));
-    ofDrawLine(0, 0, 100, 100);
-    //fft = ofxFft::create(kNumBands, OF_FFT_WINDOW_BARTLETT);
-    //audiofile.setVerbose(true);
-    //ofSetLogLevel(OF_LOG_VERBOSE);
-    //settings.setOutListener(this);
-    //settings.sampleRate = 44100;
-    //settings.numOutputChannels = 2;
-    //settings.numInputChannels = 0;
-    //settings.bufferSize = kNumBands;
-    //soundStream.setup(settings);
-    //step = audiofile.samplerate() / 44100;
-    //audiofile.load("C:/Users/Yash/Documents/109650_Operation_Evolution.mp3");
 	}
 //--------------------------------------------------------------
 void ofApp::update() {}
