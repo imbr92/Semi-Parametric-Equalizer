@@ -1,6 +1,4 @@
 #include "WavFile.h"
-//#include "stdafx.h"
-
 #include "fftw3.h"
 #include "ofApp.h"
 #include "ofMain.h"
@@ -19,7 +17,9 @@ int main() {
     // can be OF_WINDOW or OF_FULLSCREEN
     // pass in width and height too:
     // audiofile.load("C:/Users/Yash/Documents/100Hz.wav");
-    WavInFile inFile("C:/Users/Yash/Documents/100Hz.wav");
+    WavInFile inFile("C:/Users/Yash/Documents/exwav.wav");
+    WavOutFile outFile("C:/Users/Yash/Documents/out.wav", inFile.getNumSamples(), inFile.getBytesPerSample() * 8, inFile.getNumChannels());
+    //outFile.fillInHeader(inFile.getSampleRate(), inFile.getBytesPerSample() * 8, inFile.getNumChannels());
     float sampleBuffer[BUFF_SIZE];
     fftw_complex *in, *out;
     fftw_plan p, q;
@@ -44,9 +44,6 @@ int main() {
 
         fftw_execute(p); /* repeat as needed */
 
-		//confirmed that IFFT of in + out gives samples back in in[i][0]
-        fftw_execute(q);
-        
 		double mag = 0, pos = 0;
         double cdb = 0;
         vector<double> cur;
@@ -73,7 +70,13 @@ int main() {
 			}
         }
         spdbl.push_back(cur);
-
+		
+		//confirmed that IFFT of in + out gives samples back in in[i][0]
+        fftw_execute(q);
+        for (int i = 0; i < BUFF_SIZE; ++i) {
+            sampleBuffer[i] = in[i][0];
+		}
+        outFile.write(sampleBuffer, BUFF_SIZE);
         //break;
         //cout << "\n";
         //cout << mag << " pos : " << pos << "\n";
@@ -84,7 +87,11 @@ int main() {
         }
          cout << "\n";
     }
+
+	//confirmed through comparison of binary files that the header is not being recreated properly but the rest of the file is
+    outFile.close();
     fftw_destroy_plan(p);
+    fftw_destroy_plan(q);
     fftw_free(in);
     fftw_free(out);
     ofRunApp(new ofApp());

@@ -8,4 +8,9 @@ https://www.zytrax.com/tech/audio/equalization.html#fft
 http://fftw.org/fftw3_doc/Complex-One_002dDimensional-DFTs.html#Complex-One_002dDimensional-DFTs
 http://www.fftw.org/~fftw/fftw2.pdf
 http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-in-c/
-12/2 -- Went to Office Hours to get help linking DLL libraries to my project. 
+12/2 -- 
+- Went to Office Hours to get help linking DLL libraries to my project. 
+- Implemented wav file reader and performed FFT after each read 
+- Stored relative sound intensities of each frequency at each time point in a 2D vector
+- Performed IFFT and output the result back to a wav file
+- Having issues with RIFF header being different in output and input wav files (Will hopefully resolve in OH tmrw).
