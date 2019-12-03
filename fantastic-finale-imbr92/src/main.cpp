@@ -8,6 +8,9 @@ const signed kHeight = 800;
 const signed N = 2048;
 #define BUFF_SIZE 2048
 #define MAX_FREQ 22  // KHz
+#define IN_PATH "C:/Users/Yash/Documents/exwav.wav"
+#define OUT_PATH "C:/Users/Yash/Documents/out.wav"
+
 //========================================================================
 int main() {
     ofSetupOpenGL(kWidth, kHeight,
@@ -17,8 +20,8 @@ int main() {
     // can be OF_WINDOW or OF_FULLSCREEN
     // pass in width and height too:
     // audiofile.load("C:/Users/Yash/Documents/100Hz.wav");
-    WavInFile inFile("C:/Users/Yash/Documents/exwav.wav");
-    WavOutFile outFile("C:/Users/Yash/Documents/out.wav", inFile.getNumSamples(), inFile.getBytesPerSample() * 8, inFile.getNumChannels());
+    WavInFile inFile(IN_PATH);
+    WavOutFile outFile(OUT_PATH, inFile.getNumSamples(), inFile.getBytesPerSample() * 8, inFile.getNumChannels());
     //outFile.fillInHeader(inFile.getSampleRate(), inFile.getBytesPerSample() * 8, inFile.getNumChannels());
     float sampleBuffer[BUFF_SIZE];
     fftw_complex *in, *out;
@@ -81,12 +84,12 @@ int main() {
         //cout << "\n";
         //cout << mag << " pos : " << pos << "\n";
     }
-    for (auto i : spdbl) {
-        for (auto j : i) {
-            cout << j - add_factor << " ";
-        }
-         cout << "\n";
-    }
+    //for (auto i : spdbl) {
+    //    for (auto j : i) {
+    //        cout << j - add_factor << " ";
+    //    }
+    //     cout << "\n";
+    //}
 
 	//confirmed through comparison of binary files that the header is not being recreated properly but the rest of the file is
     outFile.close();
@@ -94,5 +97,21 @@ int main() {
     fftw_destroy_plan(q);
     fftw_free(in);
     fftw_free(out);
+
+	//overwrite header (not sure about exact header length, check)
+	fstream ifs(IN_PATH, ios::in | ios::binary);
+    fstream ofs(OUT_PATH,
+                ios::in | ios::out | ios::binary);
+    char x;    
+	char y[200];
+    ofs.seekg(0, ios::beg);
+	for (int i = 0; i < 200; ++i) {
+        ifs.read((&x), 1);
+            y[i] = x;
+	}
+    cout << y << endl;
+    cout << ofs.is_open();
+    ofs.write(y, sizeof(y));
     ofRunApp(new ofApp());
+    return 0;
 }
