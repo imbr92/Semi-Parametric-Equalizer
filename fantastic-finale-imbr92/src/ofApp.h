@@ -4,10 +4,16 @@
 #include "ofxGui.h"
 #include "fftw3.h"
 #include "WavFile.h"
+#include "../Polynomial.h"
 
 class ofApp : public ofBaseApp {
    public:
     const int kNumBands = 512;
+    const int kRadius = 10;
+    const int kWidth = 1200;
+    const int kHeight = 800;
+    const int kCircleSpacing = 200;
+    const std::string kOutPath = "C:/Users/Yash/Documents/out.wav";
     void setup();
     void update();
     void draw();
@@ -27,5 +33,9 @@ class ofApp : public ofBaseApp {
    private:
     ofxPanel gui;
     ofxButton load;
+	// equalize before each play
     ofxButton play;
+    vector<pair<long double, long double>> pts;
+    vector<long double> curve;
+    std::string path;
 };

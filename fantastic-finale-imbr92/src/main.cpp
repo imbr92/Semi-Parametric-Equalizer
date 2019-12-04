@@ -8,7 +8,7 @@ const signed kHeight = 800;
 const signed N = 32768;
 #define BUFF_SIZE 32768
 #define MAX_FREQ 22  // KHz
-#define IN_PATH "C:/Users/Yash/Documents/in3.wav"
+#define IN_PATH "C:/Users/Yash/Documents/exwav.wav"
 #define OUT_PATH "C:/Users/Yash/Documents/out.wav"
 
 //========================================================================
