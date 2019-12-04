@@ -5,10 +5,10 @@
 
 const signed kWidth = 1200;
 const signed kHeight = 800;
-const signed N = 4096;
-#define BUFF_SIZE 4096
+const signed N = 32768;
+#define BUFF_SIZE 32768
 #define MAX_FREQ 22  // KHz
-#define IN_PATH "C:/Users/Yash/Documents/exwav.wav"
+#define IN_PATH "C:/Users/Yash/Documents/in3.wav"
 #define OUT_PATH "C:/Users/Yash/Documents/out.wav"
 
 //========================================================================
@@ -48,6 +48,13 @@ int main() {
             in[i][0] = (double)sampleBuffer[i];
         }
 
+		// Hanning Window Function
+        // where does this go?
+        for (int i = 0; i < BUFF_SIZE; i++) {
+            sampleBuffer[i] =
+                0.5 * (1 - cos(2 * PI * i / BUFF_SIZE - 1)) * sampleBuffer[i];
+        }
+
         fftw_execute(p); /* repeat as needed */
 
         double mag = 0, pos = 0;
@@ -78,11 +85,11 @@ int main() {
             }
             out[i][0] *= N;
             out[i][1] *= N;
-                     if (i > 10 && i < 20) {
+                     if (i < 200) {
                          double cc =
                              out[i][0] * out[i][0] + out[i][1] * out[i][1];
                          cc = 20 * log10(cc);
-                         cc += 50;
+                         cc += 30;
                          cc /= 20;
                          cc = pow(10, cc);
                          cc -= out[i][1] * out[i][1];
@@ -91,14 +98,14 @@ int main() {
             }
         }
         spdbl.push_back(cur);
-
         // confirmed that IFFT of in + out gives samples back in in[i][0]
         fftw_execute(q);
         for (int i = 0; i < BUFF_SIZE; ++i) {
             sampleBuffer[i] = rev[i][0] / N;
             // cout << rev[i][0]/N << " " << in[i][0] << "\n";
         }
-        outFile.write(sampleBuffer, BUFF_SIZE);
+        
+		outFile.write(sampleBuffer, BUFF_SIZE);
         // break;
         // cout << "\n";
         // cout << mag << " pos : " << pos << "\n";

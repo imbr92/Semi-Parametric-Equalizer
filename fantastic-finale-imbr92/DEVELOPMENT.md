@@ -19,4 +19,9 @@ http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-
 - Having issues with RIFF header being different in output and input wav files
 
 12/3 -- 
-- Rewrote first 200 bytes of binary data in out.wav with info from in.wav (to make RIFF header consistent)
+- Rewrote first 5000 bytes of binary data in out.wav with info from in.wav (to make RIFF header consistent)
+- Went to Office Hours to fix an issue with binary data not being overwritten (Forgot to flush) and an issue with the library not being compatible with a certain wav file type. 
+- Got IFFT after changing the sound intensity at various frequencies working.
+
+12/4 -- 
+- 
