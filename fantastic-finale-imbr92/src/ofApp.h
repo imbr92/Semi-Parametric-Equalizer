@@ -5,6 +5,8 @@
 #include "fftw3.h"
 #include "WavFile.h"
 #include "../Polynomial.h"
+#include <windows.h>
+#include <mmsystem.h>
 
 class ofApp : public ofBaseApp {
    public:
@@ -13,7 +15,7 @@ class ofApp : public ofBaseApp {
     const int kWidth = 1200;
     const int kHeight = 800;
     const int kCircleSpacing = 200;
-    const std::string kOutPath = "C:/Users/Yash/Documents/out.wav";
+    const char* kOutPath = "C:/Users/Yash/Documents/out.wav";
     void setup();
     void update();
     void draw();
@@ -31,11 +33,13 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
    private:
+    void processSound();
     ofxPanel gui;
     ofxButton load;
 	// equalize before each play
     ofxButton play;
     vector<pair<long double, long double>> pts;
-    vector<long double> curve;
-    std::string path;
+    vector<long double> curvegraph;
+    char* path;
+    ofSoundPlayer mySound;
 };

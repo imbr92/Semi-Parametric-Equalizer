@@ -24,4 +24,9 @@ http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-
 - Got IFFT after changing the sound intensity at various frequencies working.
 
 12/4 -- 
-- 
+- Added Hann window function to reduce spectral leakage (but there are still issues with sound quality).
+- Finished making basic GUI with points and a curve
+- Began connecting GUI and DSP components
+
+12/5 -- Fixed all issues in connecting GUI and DSP (Achieved MVP goal)
+
