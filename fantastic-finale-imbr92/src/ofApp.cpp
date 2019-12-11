@@ -1,9 +1,7 @@
 #include "ofApp.h"
-ofSoundStream soundStream;
-ofSoundStreamSettings settings;
-int step = INT_MAX;
-int toMove = -1;
-const int BUFF_SIZE = 16384;
+
+const int kBufferSize = 16384;
+const int kHeaderLength = 5000;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -15,8 +13,6 @@ void ofApp::setup() {
                                 (long double)kHeight / 2.0));
     }
 }
-//--------------------------------------------------------------
-void ofApp::update() {}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -25,57 +21,48 @@ void ofApp::draw() {
         // https://openframeworks.cc/documentation/utils/ofSystemUtils/#!show_ofSystemLoadDialog
         ofFileDialogResult result = ofSystemLoadDialog("Load file");
         if (result.bSuccess) {
-            // abs path
             string respath = result.getPath();
             path = new char[respath.size()];
             std::strcpy(path, respath.c_str());
             cout << path;
-            // audiofile.load(path);
         }
     }
     if (play) {
         processSound();
-        mySound.load("C:\\Users\\Yash\\Documents\\out.wav");
+        mySound.load(kOutPathv2);
         mySound.play();
     }
 
+    // Draw draggable circles
     for (int i = 0; i < pts.size(); ++i) {
         ofDrawCircle(pts[i].first, pts[i].second, kRadius);
     }
+
+    // Draw resulting curve
     vector<pair<long double, long double>> pp = pts;
     pp.push_back({0, kHeight / 2});
-    pp.push_back({1200, kHeight / 2});
+    pp.push_back({kWidth, kHeight / 2});
     Polynomial p(pp);
     curvegraph = p.graph(0, kWidth);
-    // for (auto i : curve) cout << i << "\n";
     ofSetColor(255, 255, 255);
     ofFill();
     for (int i = 0; i < curvegraph.size(); ++i) {
         ofDrawCircle(i, curvegraph[i], 1);
     }
     ofSetColor(0, 0, 0);
-    // ofFill();
     gui.draw();
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y) {}
-
-//--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-    if (toMove == -1) return;
+    if (toMove == kNoCircle) return;
     pts[toMove].first = x;
     pts[toMove].second = y;
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
+    // Check if mouse is pressed within any of the movable circles' radii
     for (int i = 0; i < pts.size(); ++i) {
         pair<long double, long double> cur = pts[i];
         long double rsq = pow(pts[i].first - x, 2) + pow(pts[i].second - y, 2);
@@ -86,110 +73,66 @@ void ofApp::mousePressed(int x, int y, int button) {
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button) { toMove = -1; }
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y) {}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y) {}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h) {}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg) {}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo) {}
-
 void ofApp::processSound() {
-    std::ofstream del;
-    del.open(kOutPath, std::ofstream::out | std::ofstream::trunc);
-    del.close();
+    // Open wav file reader with user-specified path
     WavInFile *inFile = new WavInFile(path);
-    WavOutFile *outFile = new WavOutFile(kOutPath, inFile->getNumSamples(), 16,
+
+    // Open wav file writer to output path
+    WavOutFile *outFile = new WavOutFile(kOutPath, inFile->getNumSamples(), kBitsPerSample,
                                          inFile->getNumChannels());
-    float sampleBuffer[BUFF_SIZE];
+
+    // Loads samples from input wav
+    float sampleBuffer[kBufferSize];
+
+    // Setting up FFTW (From
+    // http://www.fftw.org/fftw3_doc/Complex-One_002dDimensional-DFTs.html#Complex-One_002dDimensional-DFTs)
     fftw_complex *in, *out, *rev;
     fftw_plan p, q;
-    in = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * BUFF_SIZE);
-    out = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * BUFF_SIZE);
-    rev = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * BUFF_SIZE);
-    p = fftw_plan_dft_1d(BUFF_SIZE, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
-    q = fftw_plan_dft_1d(BUFF_SIZE, out, rev, FFTW_BACKWARD, FFTW_ESTIMATE);
-    rev[0][0] = -60;
-    while (inFile->eof() == 0) {
-        size_t samplesRead = inFile->read(sampleBuffer, BUFF_SIZE);
+    in = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * kBufferSize);
+    out = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * kBufferSize);
+    rev = (fftw_complex *)fftw_malloc(sizeof(fftw_complex) * kBufferSize);
+    p = fftw_plan_dft_1d(kBufferSize, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
+    q = fftw_plan_dft_1d(kBufferSize, out, rev, FFTW_BACKWARD, FFTW_ESTIMATE);
 
-        for (int i = 0; i < BUFF_SIZE; i++) {
+    // Read input wav samples in order
+    while (inFile->eof() == 0) {
+        size_t samplesRead = inFile->read(sampleBuffer, kBufferSize);
+
+        // Load current samples into input array
+        for (int i = 0; i < kBufferSize; i++) {
             in[i][0] = (double)sampleBuffer[i];
             in[i][1] = 0;
         }
 
-        // Hanning Window Function
-        // where does this go?
-        for (int i = 0; i < BUFF_SIZE; i++) {
+        // Hanning Window Function (From
+        // https://stackoverflow.com/questions/3555318/implement-hann-window)
+        for (int i = 0; i < kBufferSize; i++) {
             sampleBuffer[i] =
-                0.5 * (1 - cos(2 * PI * i / BUFF_SIZE - 1)) * sampleBuffer[i];
+                0.5 * (1 - cos(2 * PI * i / kBufferSize - 1)) * sampleBuffer[i];
         }
-        fftw_execute(p); /* repeat as needed */
-        for (int i = 1; i < BUFF_SIZE - 1; ++i) {
-            // check it is within normal range of hearing (Within 20kHz)
-            if (i * inFile->getSampleRate() / BUFF_SIZE >= 20000) break;
 
-            //// Normalizing FFT Output
-            out[i][0] /= BUFF_SIZE;
-            out[i][1] /= BUFF_SIZE;
-            double cc = out[i][0] * out[i][0];
-            cc = 20 * log10(cc);
-            // 0 to 10
-            double pos = log2(1024.0 * i / BUFF_SIZE);
-            pos *= curvegraph.size() / 10.0;
-            pos = max(pos, 0.0);
-            pos = min(pos, (int)curvegraph.size() - 1.0);
-            double tmp =
-                (curvegraph[(int)pos] - kHeight / 2) * 50.0 / (kHeight / 2);
-            if (tmp != 0) tmp = tmp / abs(tmp) * min(abs(tmp), 50.0);
-            cc += -1 * tmp;
-            //cout << tmp << " " << i << "\n";
-                 //if(rev[0][0] == -60) cout << i * inFile->getSampleRate() / BUFF_SIZE << " " << -1 * tmp
-                 //    << "\n";
-                cc /= 20;
-            cc = pow(10, cc);
-            // cc -= out[i][1] * out[i][1];
-            cc = sqrt(cc);
-            // cout << tmp;
-            // if(out[i][0] != cc) cout << cc << " " << out[i][0] << "\n";
-            out[i][0] = (out[i][0] != 0 ? out[i][0] / abs(out[i][0]) : 1) * cc;
-            //// Revert FFT Output back to pre-normalized form
-            out[i][0] *= BUFF_SIZE;
-            out[i][1] *= BUFF_SIZE;
-            // for (auto i : curvegraph) cout << i << " ";
+        // Compute Complex 1D DFT
+        fftw_execute(p);
+
+        for (int i = 1; i < kBufferSize - 1; ++i) {
+            // Check current bin is within 20kHz (Human Hearing Threshold)
+            if (i * inFile->getSampleRate() / kBufferSize >= kHearingThreshold)
+                break;
+
+            out[i][0] = updateBin(out[i][0], i);
         }
-        // break;
-        // confirmed that IFFT of in + out gives samples back in rev[i][0]
+
+        // Perform Complex 1D IDFT
         fftw_execute(q);
-        for (int i = 0; i < BUFF_SIZE; ++i) {
-            // put back in rev
-            sampleBuffer[i] = rev[i][0] / BUFF_SIZE;
-            // cout << out[i][0] << " " << rev[i][0]/BUFF_SIZE << " " <<
-            // in[i][0] << "\n";
+
+        for (int i = 0; i < kBufferSize; ++i) {
+            sampleBuffer[i] = rev[i][0] / kBufferSize;
         }
-        // for (auto i : sampleBuffer) {
-        //    cout << i << " ";
-        //}
-        // cout << "\n";
-        outFile->write(sampleBuffer, BUFF_SIZE);
+
+        // Write out data to output wav
+        outFile->write(sampleBuffer, kBufferSize);
     }
 
-    // confirmed through comparison of binary files that the header is not being
-    // recreated properly but the rest of the file is
-    // cout << outFile.valid();
-    // outFile->close();
-    // outFile->finishHeader();
-    // for some reason deleting these is causing an issue (Clicking Play once is
-    // causing this method to be called multiple times???)
     delete outFile;
     delete inFile;
 
@@ -199,14 +142,48 @@ void ofApp::processSound() {
     fftw_free(out);
     fftw_free(rev);
 
-    // overwrite header (not sure about exact header length, check)
+    rewriteHeader();
+}
+
+double ofApp::updateBin(double re, int i) {
+    // Normalizing FFT Output
+    re /= kBufferSize;
+
+	// Magnitude, X-position corresponding to bin
+    double pre = re * re, pos = log2(1024.0 * i / kBufferSize);
+
+	//Converting from amplitude to decibels
+	double cc = 20 * log10(pre);
+    pos *= curvegraph.size() / 10.0;
+    
+	//Make sure pos stays within bounds
+	pos = max(pos, 0.0);
+    pos = min(pos, (int)curvegraph.size() - 1.0);
+    
+	//Calculate value to change sound intensity by
+	double tmp =
+        (curvegraph[(int)pos] - kHeight / 2) * kMaxGain / (kHeight / 2);
+
+	//Cap values at kMaxGain = 50 dB
+    if (tmp != 0) tmp = tmp / abs(tmp) * min(abs(tmp), kMaxGain);
+    
+	//Revert to amplitude form
+	cc += -1 * tmp;
+    cc /= 20;
+    cc = pow(10, cc);
+    cc = sqrt(cc);
+    return (re != 0 ? re / abs(re) : 1) * cc * kBufferSize;
+}
+
+// Rewriting first 5000 bytes to ensure header is correct
+void ofApp::rewriteHeader() {
     fstream ifs(path, ios::in | ios::binary);
     fstream ofs(kOutPath, ios::in | ios::out | ios::binary);
     char x;
-    char y[5000];
-    memset(y, 'a', sizeof(y));
+    char y[kHeaderLength];
+    memset(y, ' ', sizeof(y));
     ofs.seekg(0, ios::beg);
-    for (int i = 0; i < 5000; ++i) {
+    for (int i = 0; i < kHeaderLength; ++i) {
         ifs.read((&x), 1);
         y[i] = x;
     }

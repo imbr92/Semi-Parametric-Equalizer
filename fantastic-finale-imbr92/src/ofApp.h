@@ -15,31 +15,28 @@ class ofApp : public ofBaseApp {
     const int kWidth = 1200;
     const int kHeight = 800;
     const int kCircleSpacing = 200;
+    const int kHearingThreshold = 20000;
+    const int kNoCircle = -1;
+    const int kBitsPerSample = 16;
+    const double kMaxGain = 50.0;
     const char* kOutPath = "C:/Users/Yash/Documents/out.wav";
-    void setup();
-    void update();
+    const char* kOutPathv2 = "C:\\Users\\Yash\\Documents\\out.wav";
+    
+	void setup();
     void draw();
 
-    void keyPressed(int key);
-    void keyReleased(int key);
-    void mouseMoved(int x, int y);
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void mouseEntered(int x, int y);
-    void mouseExited(int x, int y);
-    void windowResized(int w, int h);
-    void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
 
    private:
     void processSound();
-    ofxPanel gui;
-    ofxButton load;
-	// equalize before each play
-    ofxButton play;
-    vector<pair<long double, long double>> pts;
-    vector<long double> curvegraph;
+    void rewriteHeader();
+    double updateBin(double re, int i);
     char* path;
+    int toMove = kNoCircle;
+    ofxPanel gui;
+    ofxButton load, play;
     ofSoundPlayer mySound;
+	vector<pair<long double, long double>> pts;
+    vector<long double> curvegraph;
 };
