@@ -30,3 +30,4 @@ http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-
 
 12/5 -- Fixed all issues in connecting GUI and DSP (Achieved MVP goal)
 
+12/10 -- Cleaned up code and added comments to explain more complex portions of the code.
