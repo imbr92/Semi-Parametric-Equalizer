@@ -21,3 +21,6 @@ This project is an attempt at making a parametric equalizer that can be used on 
 * Move the black circles to form a curve corresponding to the sound equalization you would like to perform on your input WAV file. 
 * Click play. After converting the file, the altered audio will start playing. In order to get the WAV file corresponding to this audio, check the specified output path in kOutPath and kOutPathv2
 
+<p align="center">
+    <img src="images/example1.png" width="1200" height="800"/>
+</p>

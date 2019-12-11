@@ -4,7 +4,7 @@
 #include "ofxGui.h"
 #include "fftw3.h"
 #include "WavFile.h"
-#include "../Polynomial.h"
+#include "Polynomial.h"
 #include <windows.h>
 #include <mmsystem.h>
 

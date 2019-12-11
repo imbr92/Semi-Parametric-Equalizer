@@ -7,12 +7,11 @@
 - **11/20/19** Made Polynomial.h and Polynomial.cpp to simplify the math involved in the project with abstraction. 
 
 - **12/1/19** Read articles about the DSP theory behind Equalizers and FFT. Then read documentation of FFTW and libsndfile libraries.
-	- Links: 
-		*https://www.meldaproduction.com/tutorials/text/equalizers
-		*https://www.zytrax.com/tech/audio/equalization.html#fft
-		*http://fftw.org/fftw3_doc/Complex-One_002dDimensional-DFTs.html#Complex-One_002dDimensional-DFTs
-		*http://www.fftw.org/~fftw/fftw2.pdf
-		*http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-in-c/
+	*https://www.meldaproduction.com/tutorials/text/equalizers
+	*https://www.zytrax.com/tech/audio/equalization.html#fft
+	*http://fftw.org/fftw3_doc/Complex-One_002dDimensional-DFTs.html#Complex-One_002dDimensional-DFTs
+	*http://www.fftw.org/~fftw/fftw2.pdf
+	*http://digitalsoundandmusic.com/5-3-3-reading-and-writing-formatted-audio-files-in-c/
 
 - **12/2/19**
 	- Went to Office Hours to get help linking DLL libraries to my project. 
