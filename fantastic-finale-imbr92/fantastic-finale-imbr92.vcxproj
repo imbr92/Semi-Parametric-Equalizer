@@ -130,9 +130,13 @@
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\Fantastic-Finale\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:/Users/Yash/Documents/Rubrics/of_v0.10.1_vs2017_release/Fantastic-Finale/</AdditionalIncludeDirectories>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -175,9 +179,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>libfftw3-3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\addons\fftw-3.3.5-dll64;C:\Users\Yash\Documents\Rubrics\of_v0.10.1_vs2017_release\Fantastic-Finale\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:/Users/Yash/Documents/Rubrics/of_v0.10.1_vs2017_release/Fantastic-Finale/</AdditionalIncludeDirectories>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Polynomial.cpp" />

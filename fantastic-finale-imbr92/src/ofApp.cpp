@@ -8,6 +8,8 @@ void ofApp::setup() {
     gui.setup();
     gui.add(load.setup("Load"));
     gui.add(play.setup("Play"));
+    ofBackground(0, 0, 0);
+    background.load(kBackgroundImagePath);
     for (int i = -2; i <= 2; ++i) {
         pts.push_back(make_pair((long double)kWidth / 2.0 + i * kCircleSpacing,
                                 (long double)kHeight / 2.0));
@@ -16,6 +18,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+    background.draw(0, 0);
     if (load) {
         // from
         // https://openframeworks.cc/documentation/utils/ofSystemUtils/#!show_ofSystemLoadDialog
@@ -31,7 +34,7 @@ void ofApp::draw() {
         mySound.load(kOutPathv2);
         mySound.play();
     }
-
+    ofSetColor(0, 0, 0);
     // Draw draggable circles
     for (int i = 0; i < pts.size(); ++i) {
         ofDrawCircle(pts[i].first, pts[i].second, kRadius);
@@ -39,16 +42,15 @@ void ofApp::draw() {
 
     // Draw resulting curve
     vector<pair<long double, long double>> pp = pts;
-    pp.push_back({0, kHeight / 2});
-    pp.push_back({kWidth, kHeight / 2});
+    pp.push_back({0 - (kWidth/16), kHeight / 2});
+    pp.push_back({kWidth + (kWidth/16), kHeight / 2});
     Polynomial p(pp);
     curvegraph = p.graph(0, kWidth);
-    ofSetColor(255, 255, 255);
-    ofFill();
+    ofSetColor(250, 4, 135);
     for (int i = 0; i < curvegraph.size(); ++i) {
         ofDrawCircle(i, curvegraph[i], 1);
     }
-    ofSetColor(0, 0, 0);
+    ofSetColor(255, 255, 255);
     gui.draw();
 }
 

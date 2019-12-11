@@ -40,3 +40,4 @@
 	- Formatted development log
 	- Added proposal.md to project
 	- Added background scale to project
+	- Could not figure out how to use a relative path for output wav because of file permission issues

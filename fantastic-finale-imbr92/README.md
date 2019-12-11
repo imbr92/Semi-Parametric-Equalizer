@@ -16,4 +16,8 @@ This project is an attempt at making a parametric equalizer that can be used on 
 * Now the program should be usable (see How to use for details on functionality)
 
 ## How to use
-* Run program
+* Run the program. The screen should show white line with black circles along the line. There should also be two buttons in the top left corner. 
+* Load a WAV file of your choice using the "Load" button
+* Move the black circles to form a curve corresponding to the sound equalization you would like to perform on your input WAV file. 
+* Click play. After converting the file, the altered audio will start playing. In order to get the WAV file corresponding to this audio, check the specified output path in kOutPath and kOutPathv2
+

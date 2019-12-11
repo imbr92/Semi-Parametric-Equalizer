@@ -21,7 +21,8 @@ class ofApp : public ofBaseApp {
     const double kMaxGain = 50.0;
     const char* kOutPath = "C:/Users/Yash/Documents/out.wav";
     const char* kOutPathv2 = "C:\\Users\\Yash\\Documents\\out.wav";
-    
+    const char* kBackgroundImagePath = "background.png";
+	
 	void setup();
     void draw();
 
@@ -36,6 +37,7 @@ class ofApp : public ofBaseApp {
     int toMove = kNoCircle;
     ofxPanel gui;
     ofxButton load, play;
+    ofImage background;
     ofSoundPlayer mySound;
 	vector<pair<long double, long double>> pts;
     vector<long double> curvegraph;
