@@ -8,8 +8,8 @@ This project is an attempt at making a parametric equalizer that can be used on 
 * [ofxGUI](https://openframeworks.cc/documentation/ofxGui/) for the GUI (polynomial visualization, buttons etc.)
 
 ## How to run 
-* Install [g++]
-* Install [Visual Studio]
+* Install g++
+* Install Visual Studio
 * Install dependencies (see Dependencies)
 * Download project source code
 * Set Output Path in kOutPath and kOutPathv2
