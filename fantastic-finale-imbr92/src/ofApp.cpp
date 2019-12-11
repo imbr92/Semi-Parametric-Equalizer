@@ -24,7 +24,6 @@ void ofApp::draw() {
             string respath = result.getPath();
             path = new char[respath.size()];
             std::strcpy(path, respath.c_str());
-            cout << path;
         }
     }
     if (play) {

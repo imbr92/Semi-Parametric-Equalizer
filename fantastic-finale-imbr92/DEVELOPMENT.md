@@ -1,4 +1,7 @@
+# Development Log
+
 - **11/16/19** Made basic GUI with ofxGui and hooked up an MP3 file to confirm functionality Play and Load buttons.
+
 - **11/17/19 - 11/19/19** Failed at using ofxAudifile, ofxFft and ofxSoundObjects due to lack of documentation and lack of knowledge about threads and DSP.
 
 - **11/20/19** Made Polynomial.h and Polynomial.cpp to simplify the math involved in the project with abstraction. 
@@ -35,4 +38,5 @@
 - **12/11/19** 
 	- Wrote readme.md
 	- Formatted development log
+	- Added proposal.md to project
 	- Added background scale to project

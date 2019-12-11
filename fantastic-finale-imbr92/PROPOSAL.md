@@ -19,10 +19,8 @@ I plan on using Soundstretch's wav file reader to load wav files into my program
 
 
   Mentioned ofx Addons:
-* [ofxAudioDecoder](https://github.com/kylemcdonald/ofxAudioDecoder)
-* [ofxAudioFile](https://github.com/npisanti/ofxAudioFile)
-* [ofxMidi](https://github.com/danomatika/ofxMidi)
-* [ofxFFT](https://github.com/julapy/ofxFFT)
+* [FFTW++](https://sourceforge.net/projects/fftwpp/)
+* [Soundstretch](https://www.surina.net/soundtouch/)
 
 ## *Timeline*
 
