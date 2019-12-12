@@ -18,7 +18,7 @@ I have no experience making audio software, but I have played around with a few 
 I plan on using Soundstretch's wav file reader to load wav files into my program and its wav file writer to write out to wav files. I also plan to use FFTW to perform FFTs and IFFTs on the data. 
 
 
-  Mentioned ofx Addons:
+  Mentioned libraries:
 * [FFTW++](https://sourceforge.net/projects/fftwpp/)
 * [Soundstretch](https://www.surina.net/soundtouch/)
 
