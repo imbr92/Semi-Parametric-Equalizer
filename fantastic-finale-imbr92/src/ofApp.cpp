@@ -31,8 +31,8 @@ void ofApp::draw() {
     }
     if (play) {
         processSound();
-        mySound.load(kOutPathv2);
-        mySound.play();
+        sound_player.load(kOutPathv2);
+        sound_player.play();
     }
     ofSetColor(0, 0, 0);
     // Draw draggable circles
@@ -45,10 +45,10 @@ void ofApp::draw() {
     pp.push_back({0 - (kWidth/16), kHeight / 2});
     pp.push_back({kWidth + (kWidth/16), kHeight / 2});
     Polynomial p(pp);
-    curvegraph = p.graph(0, kWidth);
+    poly_curve = p.graph(0, kWidth);
     ofSetColor(250, 4, 135);
-    for (int i = 0; i < curvegraph.size(); ++i) {
-        ofDrawCircle(i, curvegraph[i], 1);
+    for (int i = 0; i < poly_curve.size(); ++i) {
+        ofDrawCircle(i, poly_curve[i], 1);
     }
     ofSetColor(255, 255, 255);
     gui.draw();
@@ -56,19 +56,20 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button) {
-    if (toMove == kNoCircle) return;
-    pts[toMove].first = x;
-    pts[toMove].second = y;
+    if (to_move == kNoCircle) return;
+    pts[to_move].first = x;
+    pts[to_move].second = y;
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button) {
+    to_move = -1;
     // Check if mouse is pressed within any of the movable circles' radii
     for (int i = 0; i < pts.size(); ++i) {
         pair<long double, long double> cur = pts[i];
         long double rsq = pow(pts[i].first - x, 2) + pow(pts[i].second - y, 2);
         if (sqrt(rsq) <= kRadius) {
-            toMove = i;
+            to_move = i;
         }
     }
 }
@@ -83,7 +84,7 @@ void ofApp::processSound() {
                                          inFile->getNumChannels());
 
     // Loads samples from input wav
-    float sampleBuffer[kBufferSize];
+    float sample_buffer[kBufferSize];
 
     // Setting up FFTW (From
     // http://www.fftw.org/fftw3_doc/Complex-One_002dDimensional-DFTs.html#Complex-One_002dDimensional-DFTs)
@@ -97,19 +98,19 @@ void ofApp::processSound() {
 
     // Read input wav samples in order
     while (inFile->eof() == 0) {
-        size_t samplesRead = inFile->read(sampleBuffer, kBufferSize);
+        size_t samplesRead = inFile->read(sample_buffer, kBufferSize);
 
         // Load current samples into input array
         for (int i = 0; i < kBufferSize; i++) {
-            in[i][0] = (double)sampleBuffer[i];
+            in[i][0] = (double)sample_buffer[i];
             in[i][1] = 0;
         }
 
         // Hanning Window Function (From
         // https://stackoverflow.com/questions/3555318/implement-hann-window)
         for (int i = 0; i < kBufferSize; i++) {
-            sampleBuffer[i] =
-                0.5 * (1 - cos(2 * PI * i / kBufferSize - 1)) * sampleBuffer[i];
+            sample_buffer[i] =
+                0.5 * (1 - cos(2 * PI * i / kBufferSize - 1)) * sample_buffer[i];
         }
 
         // Compute Complex 1D DFT
@@ -127,11 +128,11 @@ void ofApp::processSound() {
         fftw_execute(q);
 
         for (int i = 0; i < kBufferSize; ++i) {
-            sampleBuffer[i] = rev[i][0] / kBufferSize;
+            sample_buffer[i] = rev[i][0] / kBufferSize;
         }
 
         // Write out data to output wav
-        outFile->write(sampleBuffer, kBufferSize);
+        outFile->write(sample_buffer, kBufferSize);
     }
 
     delete outFile;
@@ -155,15 +156,15 @@ double ofApp::updateBin(double re, int i) {
 
 	//Converting from amplitude to decibels
 	double cc = 20 * log10(pre);
-    pos *= curvegraph.size() / 10.0;
+    pos *= poly_curve.size() / 10.0;
     
 	//Make sure pos stays within bounds
 	pos = max(pos, 0.0);
-    pos = min(pos, (int)curvegraph.size() - 1.0);
+    pos = min(pos, (int)poly_curve.size() - 1.0);
     
 	//Calculate value to change sound intensity by
 	double tmp =
-        (curvegraph[(int)pos] - kHeight / 2) * kMaxGain / (kHeight / 2);
+        (poly_curve[(int)pos] - kHeight / 2) * kMaxGain / (kHeight / 2);
 
 	//Cap values at kMaxGain = 50 dB
     if (tmp != 0) tmp = tmp / abs(tmp) * min(abs(tmp), kMaxGain);

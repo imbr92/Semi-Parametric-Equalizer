@@ -34,11 +34,11 @@ class ofApp : public ofBaseApp {
     void rewriteHeader();
     double updateBin(double re, int i);
     char* path;
-    int toMove = kNoCircle;
+    int to_move = kNoCircle;
     ofxPanel gui;
     ofxButton load, play;
     ofImage background;
-    ofSoundPlayer mySound;
+    ofSoundPlayer sound_player;
 	vector<pair<long double, long double>> pts;
-    vector<long double> curvegraph;
+    vector<long double> poly_curve;
 };
